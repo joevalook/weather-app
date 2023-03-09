@@ -15,7 +15,9 @@
   <img src="../assets/regularDay.jpg" alt=" Day" *ngIf="containerStyle === 'containerRegularDay'">
   <img src="../assets/regularNight.jpg" alt=" Night" *ngIf="containerStyle === 'containerRegularNight'">
   <div class="weather-data">
+    <div class="time">{{time}}</div>
     <div class="location">{{weatherData.location.name}}</div>
+    <div class="country">{{weatherData.location.country}}</div>
     <ng-container *ngIf="system === 'Metric';">
       <div class="temperature"> {{weatherData.current.temp_c | number: '1.0-0'}}<span>&#8451;</span></div>
     </ng-container>

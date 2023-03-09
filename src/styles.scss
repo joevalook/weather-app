@@ -227,7 +227,7 @@ overflow: hidden;
 
 .weather-data {
     position: absolute;
-    top:23%;
+    top: 12%;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -237,6 +237,10 @@ overflow: hidden;
 .location {
     font-size: 3em;
     text-align: center;
+
+}
+.time {
+    margin-bottom: 8vh;
 
 }
 .temperature {

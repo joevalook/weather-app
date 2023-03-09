@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherData } from './models/weather.model';
 import { WeatherService } from './services/weather.service';
+import { cities } from '../environments/listOfCities'
 
 @Component({
 	selector: 'app-root',
@@ -16,66 +17,20 @@ export class AppComponent implements OnInit {
 	system = 'Metric'
 	weatherData?: WeatherData
 	containerStyle = "containerColdNight"; //change to object
+	randomCityIndex = Math.floor(Math.random()*cities.length)
+	time = ''
 	
 	ngOnInit() {
-		this.weatherService.getWeatherData('Izegem')
+		console.log(cities[this.randomCityIndex].name + ', ' + cities[this.randomCityIndex].country)
+		this.weatherService.getWeatherData(cities[this.randomCityIndex].name + ', ' + cities[this.randomCityIndex].country)
 			.subscribe({
 				next: (response) => {
 					this.weatherData = response;
 					console.log(response);
 					console.log(this.weatherService.isDay(response))
-					
-					if (response.current.condition.text.toLowerCase().includes('thunder')) {
-						this.containerStyle = "containerThunder";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('snow') && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerSnowDay";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('snow') && !this.weatherService.isDay(response)) {
-						this.containerStyle = "containerSnowNight";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('rain') && this.weatherService.isDay(response)) {
-						console.log('hi')
-						this.containerStyle = "containerRainDay";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('rain') && !this.weatherService.isDay(response)) {
-						this.containerStyle = "containerRainNight";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('fog')) {
-						this.containerStyle = "containerFoggy";
-					}
-					else if (Number(response.current.wind_mph) > 30 && Number(response.current.temp_c) > 0 && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerWindyDay";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('cloud') && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerCloudyDay";
-					}
-					else if (response.current.condition.text.toLowerCase().includes('cloud') && !this.weatherService.isDay(response)) {
-						this.containerStyle = "containerCloudyNight";
-					}
-					else if (Number(response.current.humidity) < 40 && Number(response.current.temp_c) > 30 && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerDesertDay";
-					}
-					else if (Number(response.current.wind_mph) > 20 && Number(response.current.temp_c) > 10 && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerWindyDay";
-					}
-
-					else if (Number(response.current.temp_c) > 25 && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerHotDay";
-					}
-					else if (Number(response.current.temp_c) < -10 && this.weatherService.isDay(response)) {
-						this.containerStyle = "containerColdDay";
-					}
-					else if (Number(response.current.temp_c) < -10 && !this.weatherService.isDay(response)) {
-						this.containerStyle = "containerColdNight";
-					}
-					else if (this.weatherService.isDay(response)) {
-						this.containerStyle = "containerRegularDay";
-					}
-					else {
-						this.containerStyle = "containerRegularNight";
-					}
+					this.containerStyle = this.weatherService.containerImage(response)
 					document.body.style.backgroundColor = this.weatherService.bodyColor(this.containerStyle);
+					this.time = this.weatherService.displayTime(response)
 				}
 			})
 	}
