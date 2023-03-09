@@ -1,59 +1,59 @@
-<div class="container" *ngIf="weatherData">
-  <ng-container *ngIf="n === 1;else weather2">
+<div [ngClass]="containerStyle" *ngIf="weatherData">
+  <ng-container *ngIf="containerStyle === 'containerThunder';else weather2">
     <img src="../assets/thunderstorm.jpg" alt="Thunder Storm">
   </ng-container>
   <ng-template #weather2>
-    <ng-container *ngIf="n === 2;else weather3">
+    <ng-container *ngIf="containerStyle === 'containerSnowDay';else weather3">
       <img src="../assets/snowDay.jpg" alt=" Snowy Day">
     </ng-container>
   </ng-template>
   <ng-template #weather3>
-    <ng-container *ngIf="n === 3;else weather4">
+    <ng-container *ngIf="containerStyle === 'containerSnowNight';else weather4">
       <img src="../assets/snowNight.jpg" alt=" Snowy Night">
     </ng-container>
   </ng-template>
   <ng-template #weather4>
-    <ng-container *ngIf="n === 4;else weather5">
+    <ng-container *ngIf="containerStyle === 'containRainDay';else weather5">
       <img src="../assets/rainDay.jpg" alt=" Rainy Day">
     </ng-container>
   </ng-template>
   <ng-template #weather5>
-    <ng-container *ngIf="n === 5;else weather6">
+    <ng-container *ngIf="containerStyle === 'containerRainNight';else weather6">
       <img src="../assets/rainNight.jpg" alt=" Rainy Night">
     </ng-container>
   </ng-template>
   <ng-template #weather6>
-    <ng-container *ngIf="n === 6;else weather7">
+    <ng-container *ngIf="containerStyle === 'containerCloudyDay';else weather7">
       <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day">
     </ng-container>
   </ng-template>
   <ng-template #weather7>
-    <ng-container *ngIf="n === 7;else weather8">
+    <ng-container *ngIf="containerStyle === 'containerCloudyNight';else weather8">
       <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night">
     </ng-container>
   </ng-template>
   <ng-template #weather8>
-    <ng-container *ngIf="n === 8;else weather9">
+    <ng-container *ngIf="containerStyle === 'containerDesertHotDay';else weather9">
       <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day">
     </ng-container>
   </ng-template>
   <ng-template #weather9>
-    <ng-container *ngIf="n === 9;else weather10">
+    <ng-container *ngIf="containerStyle === 'containerWindyDay';else weather10">
       <img src="../assets/windyDay.jpg" alt=" Windy Day">
     </ng-container>
   </ng-template>
   <ng-template #weather10>
-    <ng-container *ngIf="n === 10;else weather11">
+    <ng-container *ngIf="containerStyle === 'containerHotDay';else weather11">
       <img src="../assets/hotDay.jpg" alt=" Hot Day">
     </ng-container>
   </ng-template>
   <ng-template #weather11>
-    <ng-container *ngIf="n === 11;else weather12">
+    <ng-container *ngIf="containerStyle === 'containerColdNight';else weather12">
       <img src="../assets/coldNight.jpg" alt=" Cold Night">
     </ng-container>
   </ng-template>
   <ng-template #weather12>
-    <ng-container *ngIf="n === 12;else weather13">
+    <ng-container *ngIf="containerStyle === 'containerRegularDay';else weather13">
       <img src="../assets/regularDay.jpg" alt=" Day">
     </ng-container>
   </ng-template>

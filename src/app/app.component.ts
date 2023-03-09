@@ -15,12 +15,19 @@ export class AppComponent implements OnInit{
   n = 13;
   system = 'Metric'
   weatherData?: WeatherData
+  containerStyle = "containerSnowDay" //change to object
   ngOnInit() {
-		this.weatherService.getWeatherData('Yakutsk')
+		this.weatherService.getWeatherData('Haskell, Texas')
 		.subscribe({
 			next: (response) => {
 				this.weatherData = response;
-				console.log(response);
+				console.log(response.forecast.forecastday[0].day.condition.text.toLowerCase().includes('thunder'));
+				if (response.forecast.forecastday[0].day.condition.text.toLowerCase().includes('thunder')) {
+					//this.containerStyle="containerThunder";
+					document.body.style.backgroundColor = "rgb(83, 170, 196)";//change back to thunder
+					console.log((<any>document.getElementsByClassName("container"))) 
+
+				}
 			}
 		})
 	}

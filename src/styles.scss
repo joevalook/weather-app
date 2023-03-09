@@ -50,7 +50,139 @@ body {
     align-items: center;
 }
 
-.container {
+.containerThunder {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(40, 39, 63);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: rgb(196, 228, 166);
+    display: flex;
+    justify-content: center;
+}
+.containerSnowDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(26, 95, 118);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerSnowNight {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(25, 67, 80);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: rgb(196, 228, 166);
+    display: flex;
+    justify-content: center;
+}
+.containerRainDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(82, 117, 25);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerRainNight {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(43, 40, 90);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: rgb(196, 228, 166);
+    display: flex;
+    justify-content: center;
+}
+.containerCloudyDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(29, 63, 144);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerCloudyNight {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(13, 28, 64);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerDesertDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(156, 77, 43);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerWindyDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(79, 77, 100);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color:black;
+    display: flex;
+    justify-content: center;
+}
+.containerHotDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(156, 77, 43);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerColdNight {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(25, 31, 89);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: rgb(196, 228, 166);
+    display: flex;
+    justify-content: center;
+}
+.containerRegularDay {
+    width: 500px;
+    height: 80vh;
+    background-color: rgb(25, 89, 64);
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px $shadowDark;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.containerRegularNight {
     width: 500px;
     height: 80vh;
     background-color: rgb(4, 30, 20);
