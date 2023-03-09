@@ -18,11 +18,11 @@ export class AppComponent implements OnInit {
 	containerStyle = "containerColdNight"; //change to object
 	
 	ngOnInit() {
-		this.weatherService.getWeatherData('El Centro')
+		this.weatherService.getWeatherData('Izegem')
 			.subscribe({
 				next: (response) => {
 					this.weatherData = response;
-					console.log(response.current.humidity);
+					console.log(response);
 					console.log(this.weatherService.isDay(response))
 					
 					if (response.current.condition.text.toLowerCase().includes('thunder')) {
@@ -44,6 +44,9 @@ export class AppComponent implements OnInit {
 					else if (response.current.condition.text.toLowerCase().includes('fog')) {
 						this.containerStyle = "containerFoggy";
 					}
+					else if (Number(response.current.wind_mph) > 30 && Number(response.current.temp_c) > 0 && this.weatherService.isDay(response)) {
+						this.containerStyle = "containerWindyDay";
+					}
 					else if (response.current.condition.text.toLowerCase().includes('cloud') && this.weatherService.isDay(response)) {
 						this.containerStyle = "containerCloudyDay";
 					}
@@ -53,10 +56,24 @@ export class AppComponent implements OnInit {
 					else if (Number(response.current.humidity) < 40 && Number(response.current.temp_c) > 30 && this.weatherService.isDay(response)) {
 						this.containerStyle = "containerDesertDay";
 					}
+					else if (Number(response.current.wind_mph) > 20 && Number(response.current.temp_c) > 10 && this.weatherService.isDay(response)) {
+						this.containerStyle = "containerWindyDay";
+					}
 
-
-					else if (response.current.condition.text.toLowerCase().includes('cloud') && !this.weatherService.isDay(response)) {
-						this.containerStyle = "containerCloudyNight";
+					else if (Number(response.current.temp_c) > 25 && this.weatherService.isDay(response)) {
+						this.containerStyle = "containerHotDay";
+					}
+					else if (Number(response.current.temp_c) < -10 && this.weatherService.isDay(response)) {
+						this.containerStyle = "containerColdDay";
+					}
+					else if (Number(response.current.temp_c) < -10 && !this.weatherService.isDay(response)) {
+						this.containerStyle = "containerColdNight";
+					}
+					else if (this.weatherService.isDay(response)) {
+						this.containerStyle = "containerRegularDay";
+					}
+					else {
+						this.containerStyle = "containerRegularNight";
 					}
 					document.body.style.backgroundColor = this.weatherService.bodyColor(this.containerStyle);
 				}
