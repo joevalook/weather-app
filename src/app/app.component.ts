@@ -21,6 +21,9 @@ export class AppComponent implements OnInit {
 	time = ''
 	
 	ngOnInit() {
+		setTimeout(function(){
+			window.location.reload();
+		 }, 5000);
 		console.log(cities[this.randomCityIndex].name + ', ' + cities[this.randomCityIndex].country)
 		this.weatherService.getWeatherData(cities[this.randomCityIndex].name + ', ' + cities[this.randomCityIndex].country)
 			.subscribe({
