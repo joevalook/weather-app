@@ -1,75 +1,209 @@
-<div class="container">
-    <ng-container *ngIf="n === 1;else weather2">
-      <img src="../assets/thunderstorm.jpg" alt="Thunder Storm">
+<div class="container" *ngIf="weatherData">
+  <ng-container *ngIf="n === 1;else weather2">
+    <img src="../assets/thunderstorm.jpg" alt="Thunder Storm">
+  </ng-container>
+  <ng-template #weather2>
+    <ng-container *ngIf="n === 2;else weather3">
+      <img src="../assets/snowDay.jpg" alt=" Snowy Day">
     </ng-container>
-    <ng-template #weather2>
-      <ng-container *ngIf="n === 2;else weather3">
-        <img src="../assets/snowDay.jpg" alt=" Snowy Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather3>
-      <ng-container *ngIf="n === 3;else weather4">
-        <img src="../assets/snowNight.jpg" alt=" Snowy Night">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather4>
-      <ng-container *ngIf="n === 4;else weather5">
-        <img src="../assets/rainDay.jpg" alt=" Rainy Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather5>
-      <ng-container *ngIf="n === 5;else weather6">
-        <img src="../assets/rainNight.jpg" alt=" Rainy Night">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather6>
-      <ng-container *ngIf="n === 6;else weather7">
-        <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather7>
-      <ng-container *ngIf="n === 7;else weather8">
-        <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather8>
-      <ng-container *ngIf="n === 8;else weather9">
-        <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather9>
-      <ng-container *ngIf="n === 9;else weather10">
-        <img src="../assets/windyDay.jpg" alt=" Windy Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather10>
-      <ng-container *ngIf="n === 10;else weather11">
-        <img src="../assets/hotDay.jpg" alt=" Hot Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather11>
-      <ng-container *ngIf="n === 11;else weather12">
-        <img src="../assets/coldNight.jpg" alt=" Cold Night">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather12>
-      <ng-container *ngIf="n === 12;else weather13">
-        <img src="../assets/regularDay.jpg" alt=" Day">
-      </ng-container>
-    </ng-template>
-    <ng-template #weather13>
-      <ng-container>
-        <img src="../assets/regularNight.jpg" alt=" Night">
-      </ng-container>
-    </ng-template>
-    <div class="weather-data">
-      <div class="location">Toronto</div>
-      <div class="temperature"> {{14.40 | number: '1.0-0'}}<span>&#8451;</span></div>
-    </div>
+  </ng-template>
+  <ng-template #weather3>
+    <ng-container *ngIf="n === 3;else weather4">
+      <img src="../assets/snowNight.jpg" alt=" Snowy Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather4>
+    <ng-container *ngIf="n === 4;else weather5">
+      <img src="../assets/rainDay.jpg" alt=" Rainy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather5>
+    <ng-container *ngIf="n === 5;else weather6">
+      <img src="../assets/rainNight.jpg" alt=" Rainy Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather6>
+    <ng-container *ngIf="n === 6;else weather7">
+      <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather7>
+    <ng-container *ngIf="n === 7;else weather8">
+      <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather8>
+    <ng-container *ngIf="n === 8;else weather9">
+      <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather9>
+    <ng-container *ngIf="n === 9;else weather10">
+      <img src="../assets/windyDay.jpg" alt=" Windy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather10>
+    <ng-container *ngIf="n === 10;else weather11">
+      <img src="../assets/hotDay.jpg" alt=" Hot Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather11>
+    <ng-container *ngIf="n === 11;else weather12">
+      <img src="../assets/coldNight.jpg" alt=" Cold Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather12>
+    <ng-container *ngIf="n === 12;else weather13">
+      <img src="../assets/regularDay.jpg" alt=" Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather13>
+    <ng-container>
+      <img src="../assets/regularNight.jpg" alt=" Night">
+    </ng-container>
+  </ng-template>
+  <div class="weather-data">
+    <div class="location">{{weatherData.location.name}}</div>
+    <ng-container *ngIf="system === 'Metric';">
+      <div class="temperature"> {{weatherData.current.temp_c | number: '1.0-0'}}<span>&#8451;</span></div>
+    </ng-container>
+    <ng-container *ngIf="system === 'Imperial';">
+      <div class="temperature"> {{weatherData.current.temp_f | number: '1.0-0'}}<span>&#8457;</span></div>
+    </ng-container>
+  </div>
   <div class="lower-data">
     <div class="weather-subsection">
       <div class="subsection-label">
-        <img src="" alt="">
+        <img src="../assets/thermometerDown.png" alt="">
+        <span>min</span>
+      </div>
+      <div class="subsection-value">
+        <ng-container *ngIf="system === 'Metric';">
+          {{weatherData.forecast.forecastday[0].day.mintemp_c | number: '1.0-0'}}<span>&#8451;</span>
+        </ng-container>
+        <ng-container *ngIf="system === 'Imperial';">
+          {{weatherData.forecast.forecastday[0].day.mintemp_f | number: '1.0-0'}}<span>&#8457;</span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="weather-subsection">
+      <div class="subsection-label">
+        <img src="../assets/thermometerUp.png" alt="">
+        <span>max</span>
+      </div>
+      <div class="subsection-value">
+        <ng-container *ngIf="system === 'Metric';">
+          {{weatherData.forecast.forecastday[0].day.maxtemp_c | number: '1.0-0'}}<span>&#8451;</span>
+        </ng-container>
+        <ng-container *ngIf="system === 'Imperial';">
+          {{weatherData.forecast.forecastday[0].day.maxtemp_f | number: '1.0-0'}}<span>&#8457;</span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="weather-subsection">
+      <div class="subsection-label">
+        <img src="../assets/humidity.png" alt="">
+        <span>humidity</span>
+      </div>
+      <div class="subsection-value">
+        {{weatherData.current.humidity}}%
+      </div>
+    </div>
+    <div class="weather-subsection">
+      <div class="subsection-label-wind">
+        <img src="../assets/wind.png" alt="">
+        <span>wind</span>
+      </div>
+      <div class="subsection-value">
+        <ng-container *ngIf="system === 'Metric';">
+          {{weatherData.current.wind_kph | number: '1.0-0'}} kph
+        </ng-container>
+        <ng-container *ngIf="system === 'Imperial';">
+          {{weatherData.current.wind_mph | number: '1.0-0'}} mph
+        </ng-container>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div class="container" *ngIf="weatherData===null">
+  <ng-container *ngIf="n === 1;else weather2">
+    <img src="../assets/thunderstorm.jpg" alt="Thunder Storm">
+  </ng-container>
+  <ng-template #weather2>
+    <ng-container *ngIf="n === 2;else weather3">
+      <img src="../assets/snowDay.jpg" alt=" Snowy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather3>
+    <ng-container *ngIf="n === 3;else weather4">
+      <img src="../assets/snowNight.jpg" alt=" Snowy Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather4>
+    <ng-container *ngIf="n === 4;else weather5">
+      <img src="../assets/rainDay.jpg" alt=" Rainy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather5>
+    <ng-container *ngIf="n === 5;else weather6">
+      <img src="../assets/rainNight.jpg" alt=" Rainy Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather6>
+    <ng-container *ngIf="n === 6;else weather7">
+      <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather7>
+    <ng-container *ngIf="n === 7;else weather8">
+      <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather8>
+    <ng-container *ngIf="n === 8;else weather9">
+      <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather9>
+    <ng-container *ngIf="n === 9;else weather10">
+      <img src="../assets/windyDay.jpg" alt=" Windy Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather10>
+    <ng-container *ngIf="n === 10;else weather11">
+      <img src="../assets/hotDay.jpg" alt=" Hot Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather11>
+    <ng-container *ngIf="n === 11;else weather12">
+      <img src="../assets/coldNight.jpg" alt=" Cold Night">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather12>
+    <ng-container *ngIf="n === 12;else weather13">
+      <img src="../assets/regularDay.jpg" alt=" Day">
+    </ng-container>
+  </ng-template>
+  <ng-template #weather13>
+    <ng-container>
+      <img src="../assets/regularNight.jpg" alt=" Night">
+    </ng-container>
+  </ng-template>
+  <div class="weather-data">
+    <div class="location">Toronto</div>
+    <ng-container *ngIf="system === 'Metric';">
+      <div class="temperature"> {{14 | number: '1.0-0'}}<span>&#8451;</span></div>
+    </ng-container>
+    <ng-container *ngIf="system === 'Imperial';">
+      <div class="temperature"> {{19 | number: '1.0-0'}}<span>&#8451;</span></div>
+    </ng-container>
+  </div>
+  <div class="lower-data">
+    <div class="weather-subsection">
+      <div class="subsection-label">
+        <img src="../assets/thermometerDown.png" alt="">
         <span>min</span>
       </div>
       <div class="subsection-value">
@@ -78,8 +212,17 @@
     </div>
     <div class="weather-subsection">
       <div class="subsection-label">
-        <img src="" alt="">
-        <span>min</span>
+        <img src="../assets/thermometerUp.png" alt="">
+        <span>max</span>
+      </div>
+      <div class="subsection-value">
+        20<span>&#8451;</span>
+      </div>
+    </div>
+    <div class="weather-subsection">
+      <div class="subsection-label">
+        <img src="../assets/humidity.png" alt="">
+        <span>humidity</span>
       </div>
       <div class="subsection-value">
         10<span>&#8451;</span>
@@ -87,17 +230,8 @@
     </div>
     <div class="weather-subsection">
       <div class="subsection-label">
-        <img src="" alt="">
-        <span>min</span>
-      </div>
-      <div class="subsection-value">
-        10<span>&#8451;</span>
-      </div>
-    </div>
-    <div class="weather-subsection">
-      <div class="subsection-label">
-        <img src="" alt="">
-        <span>min</span>
+        <img src="../assets/wind.png" alt="">
+        <span>wind</span>
       </div>
       <div class="subsection-value">
         10<span>&#8451;</span>
