@@ -1,67 +1,19 @@
 <div [ngClass]="containerStyle" *ngIf="weatherData">
-  <ng-container *ngIf="containerStyle === 'containerThunder';else weather2">
-    <img src="../assets/thunderstorm.jpg" alt="Thunder Storm">
-  </ng-container>
-  <ng-template #weather2>
-    <ng-container *ngIf="containerStyle === 'containerSnowDay';else weather3">
-      <img src="../assets/snowDay.jpg" alt=" Snowy Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather3>
-    <ng-container *ngIf="containerStyle === 'containerSnowNight';else weather4">
-      <img src="../assets/snowNight.jpg" alt=" Snowy Night">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather4>
-    <ng-container *ngIf="containerStyle === 'containRainDay';else weather5">
-      <img src="../assets/rainDay.jpg" alt=" Rainy Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather5>
-    <ng-container *ngIf="containerStyle === 'containerRainNight';else weather6">
-      <img src="../assets/rainNight.jpg" alt=" Rainy Night">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather6>
-    <ng-container *ngIf="containerStyle === 'containerCloudyDay';else weather7">
-      <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather7>
-    <ng-container *ngIf="containerStyle === 'containerCloudyNight';else weather8">
-      <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather8>
-    <ng-container *ngIf="containerStyle === 'containerDesertHotDay';else weather9">
-      <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather9>
-    <ng-container *ngIf="containerStyle === 'containerWindyDay';else weather10">
-      <img src="../assets/windyDay.jpg" alt=" Windy Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather10>
-    <ng-container *ngIf="containerStyle === 'containerHotDay';else weather11">
-      <img src="../assets/hotDay.jpg" alt=" Hot Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather11>
-    <ng-container *ngIf="containerStyle === 'containerColdNight';else weather12">
-      <img src="../assets/coldNight.jpg" alt=" Cold Night">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather12>
-    <ng-container *ngIf="containerStyle === 'containerRegularDay';else weather13">
-      <img src="../assets/regularDay.jpg" alt=" Day">
-    </ng-container>
-  </ng-template>
-  <ng-template #weather13>
-    <ng-container>
-      <img src="../assets/regularNight.jpg" alt=" Night">
-    </ng-container>
-  </ng-template>
+  <img src="../assets/thunderstorm.jpg" alt="Thunder Storm" *ngIf="containerStyle === 'containerThunder'" >
+  <img src="../assets/snowDay.jpg" alt=" Snowy Day" *ngIf="containerStyle === 'containerSnowDay'">
+  <img src="../assets/snowNight.jpg" alt=" Snowy Night" *ngIf="containerStyle === 'containerSnowNight'">
+  <img src="../assets/rainDay.jpg" alt=" Rainy Day" *ngIf="containerStyle === 'containerRainDay'">
+  <img src="../assets/rainNight.jpg" alt=" Rainy Night" *ngIf="containerStyle === 'containerRainNight'">
+  <img src="../assets/foggy.jpg" alt=" Night" *ngIf="containerStyle === 'containerFoggy'">
+  <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day" *ngIf="containerStyle === 'containerCloudyDay'">
+  <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night" *ngIf="containerStyle === 'containerCloudyNight'">
+  <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day" *ngIf="containerStyle === 'containerDesertDay'">
+  <img src="../assets/windyDay.jpg" alt=" Windy Day" *ngIf="containerStyle === 'containerWindyDay'">
+  <img src="../assets/hotDay.jpg" alt=" Hot Day" *ngIf="containerStyle === 'containerHotDay'">
+  <img src="../assets/coldDay.jpg" alt=" Night" *ngIf="containerStyle === 'containerColdDay'">
+  <img src="../assets/coldNight.jpg" alt=" Cold Night" *ngIf="containerStyle === 'containerColdNight'">
+  <img src="../assets/regularDay.jpg" alt=" Day" *ngIf="containerStyle === 'containerRegularDay'">
+  <img src="../assets/regularNight.jpg" alt=" Night" *ngIf="containerStyle === 'containerRegularNight'">
   <div class="weather-data">
     <div class="location">{{weatherData.location.name}}</div>
     <ng-container *ngIf="system === 'Metric';">
@@ -70,6 +22,9 @@
     <ng-container *ngIf="system === 'Imperial';">
       <div class="temperature"> {{weatherData.current.temp_f | number: '1.0-0'}}<span>&#8457;</span></div>
     </ng-container>
+  </div>
+  <div class="condition">
+    {{weatherData.current.condition.text}}
   </div>
   <div class="lower-data">
     <div class="weather-subsection">
@@ -102,6 +57,17 @@
     </div>
     <div class="weather-subsection">
       <div class="subsection-label">
+        <img src="../assets/sunrise.png" alt="">
+        <span>Sunrise</span>
+      </div>
+      <div class="subsection-value">
+        {{weatherData.forecast.forecastday[0].astro.sunrise[0]=== '0' ?
+        weatherData.forecast.forecastday[0].astro.sunrise.substring(1):
+        weatherData.forecast.forecastday[0].astro.sunrise}}
+      </div>
+    </div>
+    <div class="weather-subsection">
+      <div class="subsection-label">
         <img src="../assets/humidity.png" alt="">
         <span>humidity</span>
       </div>
@@ -125,20 +91,13 @@
     </div>
     <div class="weather-subsection">
       <div class="subsection-label">
-        <img src="../assets/sunrise.png" alt="">
-        <span>Sunrise</span>
-      </div>
-      <div class="subsection-value">
-        {{weatherData.forecast.forecastday[0].astro.sunrise[0]=== '0' ? weatherData.forecast.forecastday[0].astro.sunrise.substring(1): weatherData.forecast.forecastday[0].astro.sunrise}}
-      </div>
-    </div>
-    <div class="weather-subsection">
-      <div class="subsection-label">
         <img src="../assets/sunset.png" alt="">
         <span>Sunset</span>
       </div>
       <div class="subsection-value">
-        {{weatherData.forecast.forecastday[0].astro.sunset[0]=== '0' ? weatherData.forecast.forecastday[0].astro.sunset.substring(1): weatherData.forecast.forecastday[0].astro.sunset}}
+        {{weatherData.forecast.forecastday[0].astro.sunset[0]=== '0' ?
+        weatherData.forecast.forecastday[0].astro.sunset.substring(1):
+        weatherData.forecast.forecastday[0].astro.sunset}}
       </div>
     </div>
 
