@@ -229,7 +229,8 @@ overflow: hidden;
     width: 500px;
     position: absolute;
     display: grid;
-    grid-template-columns: 50% 50% ;
+    grid-template-columns: 33% 33% 33% ;
+    padding-left: 50px;
 
     img{
         width: 40px;
@@ -239,7 +240,6 @@ overflow: hidden;
 
 .weather-subsection{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: row;
 }

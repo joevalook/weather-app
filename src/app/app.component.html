@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="weather-subsection">
-      <div class="subsection-label-wind">
+      <div class="subsection-label">
         <img src="../assets/wind.png" alt="">
         <span>wind</span>
       </div>
@@ -123,10 +123,30 @@
         </ng-container>
       </div>
     </div>
+    <div class="weather-subsection">
+      <div class="subsection-label">
+        <img src="../assets/sunrise.png" alt="">
+        <span>Sunrise</span>
+      </div>
+      <div class="subsection-value">
+        {{weatherData.forecast.forecastday[0].astro.sunrise[0]=== '0' ? weatherData.forecast.forecastday[0].astro.sunrise.substring(1): weatherData.forecast.forecastday[0].astro.sunrise}}
+      </div>
+    </div>
+    <div class="weather-subsection">
+      <div class="subsection-label">
+        <img src="../assets/sunset.png" alt="">
+        <span>Sunset</span>
+      </div>
+      <div class="subsection-value">
+        {{weatherData.forecast.forecastday[0].astro.sunset[0]=== '0' ? weatherData.forecast.forecastday[0].astro.sunset.substring(1): weatherData.forecast.forecastday[0].astro.sunset}}
+      </div>
+    </div>
 
 
   </div>
 </div>
+
+
 <div class="container" *ngIf="weatherData===null">
   <ng-container *ngIf="n === 1;else weather2">
     <img src="../assets/thunderstorm.jpg" alt="Thunder Storm">
