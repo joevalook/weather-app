@@ -18,8 +18,59 @@ export class WeatherService {
       .set(environment.XRapidAPIKeyHeaderName, environment.XRapidAPIKeyHeaderValue),
       params: new HttpParams()
       .set('q', city)
-      .set('days', 1)
+      .set('days', 7)
     })
+  }
+  stringTrim(response: WeatherData): string{
+    if (response.location.name.indexOf('(') != -1) {
+      return response.location.name.substring(0, response.location.name.indexOf('('));
+    }
+    else {
+      return response.location.name
+    }
+  }
+  arrOfDates(response: WeatherData): string[]{
+    let arr = []
+    for (let element of response.forecast.forecastday) {
+      let dateNum = element.date
+      if (dateNum.substring(5,7) === '01'){
+        arr.push('Jan' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '02'){
+        arr.push('Feb' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '03'){
+        arr.push('Mar' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '04'){
+        arr.push('Apr' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '05'){
+        arr.push('May' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '06'){
+        arr.push('Jun' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '07'){
+        arr.push('Jul' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '08'){
+        arr.push('Aug' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '09'){
+        arr.push('Sep' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '10'){
+        arr.push('Oct' + "/" + dateNum.substring(8,10) )
+      }
+      else if (dateNum.substring(5,7) === '11'){
+        arr.push('Nov' + "/" + dateNum.substring(8,10) )
+      }
+      else{
+        arr.push('Dec' + "/" + dateNum.substring(8,10) )
+      }
+    }
+    return arr
   }
   isDay(response: WeatherData): Boolean {
 		let currentTime = response.location.localtime.split(" ")[1]
@@ -33,7 +84,6 @@ export class WeatherService {
 		else {
 			sunrise = String(Number(sunrise.substring(0,2)) + 12) + sunrise.substring(2,5);
 		}
-		console.log("Sunrise " + sunrise)
 		let sunset = response.forecast.forecastday[0].astro.sunset
 		if (sunset[sunset.length - 2] === 'A'){
 			sunset = sunset.substring(0, 5)
@@ -41,7 +91,6 @@ export class WeatherService {
 		else {
 			sunset = String(Number(sunset.substring(0,2)) + 12) + sunset.substring(2,5);
 		}
-		console.log("Sunset " + sunset)
 		if (currentTime > sunrise && currentTime < sunset) {
 			return true
 		}
@@ -55,7 +104,6 @@ export class WeatherService {
     if (currentTime[1] ===':') {
 			currentTime = '0' + response.location.localtime.split(" ")[1]
 		}
-    console.log("Current time: " + currentTime)
     if (Number(currentTime.substring(0,2)) <= 12 ) {
       if (currentTime.substring(0,2) == '00') {
         return ('12' + currentTime.substring(2,5) + ' AM')
@@ -131,7 +179,6 @@ export class WeatherService {
       return "containerSnowNight";
     }
     else if (response.current.condition.text.toLowerCase().includes('rain') && this.isDay(response)) {
-      console.log('hi')
       return "containerRainDay";
     }
     else if (response.current.condition.text.toLowerCase().includes('rain') && !this.isDay(response)) {

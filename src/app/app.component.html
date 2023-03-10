@@ -1,22 +1,29 @@
+<div class="search">
+  <form>
+    <input type="text" placeholder="city/country/postalcode">
+  </form>
+</div>
+
+
 <div [ngClass]="containerStyle" *ngIf="weatherData">
-  <img src="../assets/thunderstorm.jpg" alt="Thunder Storm" *ngIf="containerStyle === 'containerThunder'" >
-  <img src="../assets/snowDay.jpg" alt=" Snowy Day" *ngIf="containerStyle === 'containerSnowDay'">
-  <img src="../assets/snowNight.jpg" alt=" Snowy Night" *ngIf="containerStyle === 'containerSnowNight'">
-  <img src="../assets/rainDay.jpg" alt=" Rainy Day" *ngIf="containerStyle === 'containerRainDay'">
-  <img src="../assets/rainNight.jpg" alt=" Rainy Night" *ngIf="containerStyle === 'containerRainNight'">
-  <img src="../assets/foggy.jpg" alt=" Night" *ngIf="containerStyle === 'containerFoggy'">
-  <img src="../assets/cloudyDay.jpg" alt=" Cloudy Day" *ngIf="containerStyle === 'containerCloudyDay'">
-  <img src="../assets/cloudyNight.jpg" alt=" Cloudy Night" *ngIf="containerStyle === 'containerCloudyNight'">
-  <img src="../assets/desertHotDay.jpg" alt="Low Humidity Day" *ngIf="containerStyle === 'containerDesertDay'">
-  <img src="../assets/windyDay.jpg" alt=" Windy Day" *ngIf="containerStyle === 'containerWindyDay'">
-  <img src="../assets/hotDay.jpg" alt=" Hot Day" *ngIf="containerStyle === 'containerHotDay'">
-  <img src="../assets/coldDay.jpg" alt=" Night" *ngIf="containerStyle === 'containerColdDay'">
-  <img src="../assets/coldNight.jpg" alt=" Cold Night" *ngIf="containerStyle === 'containerColdNight'">
-  <img src="../assets/regularDay.jpg" alt=" Day" *ngIf="containerStyle === 'containerRegularDay'">
-  <img src="../assets/regularNight.jpg" alt=" Night" *ngIf="containerStyle === 'containerRegularNight'">
+  <img src="../assets/thunderstorm-min.jpg" alt="Thunder Storm" *ngIf="containerStyle === 'containerThunder'">
+  <img src="../assets/snowDay-min.jpg" alt=" Snowy Day" *ngIf="containerStyle === 'containerSnowDay'">
+  <img src="../assets/snowNight-min.jpg" alt=" Snowy Night" *ngIf="containerStyle === 'containerSnowNight'">
+  <img src="../assets/rainDay-min.jpg" alt=" Rainy Day" *ngIf="containerStyle === 'containerRainDay'">
+  <img src="../assets/rainNight-min.jpg" alt=" Rainy Night" *ngIf="containerStyle === 'containerRainNight'">
+  <img src="../assets/foggy-min.jpg" alt=" Night" *ngIf="containerStyle === 'containerFoggy'">
+  <img src="../assets/cloudyDay-min.jpg" alt=" Cloudy Day" *ngIf="containerStyle === 'containerCloudyDay'">
+  <img src="../assets/cloudyNight-min.jpg" alt=" Cloudy Night" *ngIf="containerStyle === 'containerCloudyNight'">
+  <img src="../assets/desertHotDay-min.jpg" alt="Low Humidity Day" *ngIf="containerStyle === 'containerDesertDay'">
+  <img src="../assets/windyDay-min.jpg" alt=" Windy Day" *ngIf="containerStyle === 'containerWindyDay'">
+  <img src="../assets/hotDay-min.jpg" alt=" Hot Day" *ngIf="containerStyle === 'containerHotDay'">
+  <img src="../assets/coldDay-min.jpg" alt=" Night" *ngIf="containerStyle === 'containerColdDay'">
+  <img src="../assets/coldNight-min.jpg" alt=" Cold Night" *ngIf="containerStyle === 'containerColdNight'">
+  <img src="../assets/regularDay-min.jpg" alt=" Day" *ngIf="containerStyle === 'containerRegularDay'">
+  <img src="../assets/regularNight-min.jpg" alt=" Night" *ngIf="containerStyle === 'containerRegularNight'">
   <div class="weather-data">
     <div class="time">{{time}}</div>
-    <div class="location">{{weatherData.location.name}}</div>
+    <div class="location">{{location}}</div>
     <div class="country">{{weatherData.location.country}}</div>
     <ng-container *ngIf="system === 'Metric';">
       <div class="temperature"> {{weatherData.current.temp_c | number: '1.0-0'}}<span>&#8451;</span></div>
@@ -24,6 +31,20 @@
     <ng-container *ngIf="system === 'Imperial';">
       <div class="temperature"> {{weatherData.current.temp_f | number: '1.0-0'}}<span>&#8457;</span></div>
     </ng-container>
+  </div>
+  <div class="slidecontainer">
+    <form class="slider-form">
+      <div id="date-slider">
+        <input type="radio" name="date" id="1" value="1" checked="checked" required>
+        <label for="1" [attr.data-date]="dateArr[0]"></label>
+        <input type="radio" name="date" id="2" value="2" required>
+        <label for="2" [attr.data-date]="dateArr[1]"></label>
+        <input type="radio" name="date" id="3" value="3" required>
+        <label for="3" [attr.data-date]="dateArr[2]"></label>
+        <div id="debt-amount-pos"></div>
+      </div>
+    </form>
+    <div id="debt-amount-pos"></div>
   </div>
   <div class="condition">
     {{weatherData.current.condition.text}}
@@ -105,6 +126,11 @@
 
 
   </div>
+</div>
+
+<div class="play-pause">
+  <img class="repeat" (click)='repeatClick()' src="../assets/pause.png" alt="" *ngIf="repeat === true">
+  <img class="repeat" (click)='repeatClick()' src="../assets/play.png" alt="" *ngIf="repeat === false">
 </div>
 
 
