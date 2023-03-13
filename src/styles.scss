@@ -230,6 +230,7 @@ border-radius: 20px;
 overflow: hidden;
 }
 
+
 .weather-data {
     position: absolute;
     top: 9%;
@@ -245,6 +246,7 @@ overflow: hidden;
     max-width: 100%;
 }
 .time {
+    margin-top: 1vh;
     margin-bottom: 8vh;
     font-weight: 600;
 }
@@ -256,7 +258,7 @@ overflow: hidden;
 }
 .lower-data{
     height: 25vh;
-    top:60%;
+    top:63%;
     width: 500px;
     position: absolute;
     display: grid;
@@ -270,7 +272,7 @@ overflow: hidden;
 }
 .condition{
     position: absolute;
-    top:59%;
+    top:60%;
     width: $width;
     display: flex;
     justify-content: center;
@@ -333,7 +335,18 @@ overflow: hidden;
 .search{
   margin-top: 2vh;
   margin-bottom: 1vh;
+  margin-left: 33%;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: center;
+}
+.CorF{
+  width: 40px; 
+  height: 40px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 .search input{
   background-color: white;

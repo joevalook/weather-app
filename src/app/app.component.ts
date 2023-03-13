@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   myInterval: any
   dateArr: string[]
   location: string
-  cityName = 'toronto'
+  cityName = ''
   sliderDate = 1
   dailyData: any
 
@@ -58,13 +58,21 @@ export class AppComponent implements OnInit {
 	this.onPause()
 	this.getData(this.weatherData.location.name)
   }
+  onChangeSystem(){
+	this.onPause()
+	if (this.system === 'Metric') {
+		this.system = 'Imperial'
+	}
+	else {
+		this.system = 'Metric'
+	}
 
+  }
   getData(randomCity: string) {
     this.weatherService.getWeatherData(randomCity)
       .subscribe({
         next: (response) => {
           this.weatherData = response;
-          console.log(response);
           this.dailyData = this.weatherService.weatherForDate(response, this.sliderDate)
           this.containerStyle = this.weatherService.containerImage(this.dailyData)
           document.body.style.backgroundColor = this.weatherService.bodyColor(this.containerStyle);
@@ -82,7 +90,6 @@ export class AppComponent implements OnInit {
   onPlay(){
     this.myInterval = setInterval(() => {
       this.getData(cities[Math.floor(Math.random() * cities.length)].name + ', ' + cities[Math.floor(Math.random() * cities.length)].country)
-      console.log(this.randomCityIndex)
     }, 5000);
     this.repeat =true
   }
@@ -95,9 +102,7 @@ export class AppComponent implements OnInit {
     this.getData(cities[Math.floor(Math.random() * cities.length)].name + ', ' + cities[Math.floor(Math.random() * cities.length)].country)
     this.myInterval = setInterval(() => {
       this.getData(cities[Math.floor(Math.random() * cities.length)].name + ', ' + cities[Math.floor(Math.random() * cities.length)].country)
-      console.log(this.randomCityIndex)
     }, 5000);
-    console.log(cities[this.randomCityIndex].name + ', ' + cities[this.randomCityIndex].country)
-    console.log(this.randomCityIndex)
+
   }
 }

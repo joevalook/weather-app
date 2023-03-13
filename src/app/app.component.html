@@ -1,7 +1,14 @@
 <div class="search">
-  <form #search="ngForm" (click)="onPause()" (submit) = "onSearch()">
-    <input type="text" placeholder="city/country/postalcode" name="locationForm" [(ngModel)] = "cityName">
+  <form #search="ngForm" (click)="onPause()" (submit)="onSearch()">
+    <input type="text" placeholder="city/country/postalcode" name="locationForm" [(ngModel)]="cityName">
   </form>
+  <div class="button r" id="celsius-button" (click)="onChangeSystem()">
+    <input type="checkbox" class="checkbox" />
+    <div class="knobs"></div>
+    <div class="layer"></div>
+  </div>
+  <!-- <img src="../assets/fahrenheit.png" (click)="onChangeSystem()" class = "CorF" *ngIf="system === 'Metric'">
+  <img src="../assets/celsius.png" (click)="onChangeSystem()" class = "CorF" *ngIf="system === 'Imperial'"> -->
 </div>
 
 
@@ -35,11 +42,11 @@
   <div class="slidecontainer" (click)="onChangeDate()">
     <form class="slider-form">
       <div id="date-slider">
-        <input type="radio" name="date" id="1" [value]="1" [(ngModel)] = "sliderDate">
-        <label for="1" [attr.data-date]="dateArr[0]" ></label>
-        <input type="radio" name="date" id="2" [value]="2"  [(ngModel)] = "sliderDate">
+        <input type="radio" name="date" id="1" [value]="1" [(ngModel)]="sliderDate">
+        <label for="1" [attr.data-date]="dateArr[0]"></label>
+        <input type="radio" name="date" id="2" [value]="2" [(ngModel)]="sliderDate">
         <label for="2" [attr.data-date]="dateArr[1]"></label>
-        <input type="radio" name="date" id="3" [value]="3"  [(ngModel)] = "sliderDate">
+        <input type="radio" name="date" id="3" [value]="3" [(ngModel)]="sliderDate">
         <label for="3" [attr.data-date]="dateArr[2]"></label>
         <div id="debt-amount-pos"></div>
       </div>
