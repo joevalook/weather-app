@@ -34,7 +34,8 @@ $regularNightContainer: rgb(4, 30, 20);
 $regularNightText: rgb(196, 228, 166);
 $width: 65vh;
 $imgwidth: (calc(65vh + 2px));
-
+$width2: 100vw;
+$height2: 85vh;
 *{
     margin: 0;
     padding: 0;
@@ -220,8 +221,6 @@ input:focus::placeholder {
     display: flex;
     justify-content: center;
 }
-
-
 img {
 margin-left: -1px;
 width: $imgwidth;
@@ -229,6 +228,7 @@ height: 40vh;
 border-radius: 20px;
 overflow: hidden;
 }
+
 
 
 .weather-data {
@@ -360,3 +360,96 @@ overflow: hidden;
   text-align: center;
 
 }
+
+@media only screen and (max-width: 505px) {
+    .containerThunder {
+        width: $width2;
+        height: $height2;
+    }
+    .containerSnowDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerSnowNight {
+        width: $width2;
+        height: $height2;
+    }
+    .containerRainDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerRainNight {
+        width: $width2;
+        height: $height2;
+    }
+    .containerFoggy {
+        width: $width2;
+        height: $height2;
+    }
+    .containerCloudyDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerCloudyNight {
+        width: $width2;
+        height: $height2;
+    }
+    .containerDesertDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerWindyDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerHotDay {
+        width: $width2;
+        height: $height2;   
+    }
+    .containerColdDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerColdNight {
+        width: $width2;
+        height: $height2;
+    }
+    .containerRegularDay {
+        width: $width2;
+        height: $height2;
+    }
+    .containerRegularNight {
+        width: $width2;
+        height: $height2;
+    }
+    img {
+        width: $width2;
+        height: 60vw;
+    }
+    .lower-data{
+        top: 65%;
+        grid-template-columns: 50% 50%;
+        justify-items: center;
+        margin-right: 10vw;
+        font-size: 10px;
+    }
+    .condition{
+        font-size: 15px;
+        top: 60%;
+    }
+    .location{
+        font-size: 25px
+    }
+    .country{
+        font-size: 12px;
+    }
+    .temperature{
+        font-size: 20px
+    }
+    .subsection-label{
+        font-size: 12px;
+    }
+    .slidecontainer{
+        top: 50%
+    }
+  }

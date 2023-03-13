@@ -1,3 +1,12 @@
+# Global Weather Visualizer
+
+## Final Project
+
+![Desktop View for when a user searches a location and it is snowing](https://github.com/joevalook/globalWeatherApp/blob/main/src/assets/githubPics/MarkhamCold.png?raw=true)
+![Desktop View for Brasilia where it is raining](https://github.com/joevalook/globalWeatherApp/blob/main/src/assets/githubPics/BrasiliaRain.png?raw=true)
+![Desktop view for Buenos on today's date](https://github.com/joevalook/globalWeatherApp/blob/main/src/assets/githubPics/BuenosHot.png?raw=true)
+![Desktop View for Buenos 2 days from now](https://github.com/joevalook/globalWeatherApp/blob/main/src/assets/githubPics/BuenosRain.png?raw=true)
+
 # WeatherApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
