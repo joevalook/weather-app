@@ -1,5 +1,7 @@
 # Global Weather Visualizer
 
+Application utilizes realtime data to allow the user to visualize and 'experience' the weather at a certain location.
+
 ## Final Project
 
 ![Desktop View for when a user searches a location and it is snowing](https://github.com/joevalook/globalWeatherApp/blob/main/src/assets/githubPics/MarkhamCold.png?raw=true)
@@ -9,12 +11,12 @@
 
 ## Getting Started
 
-1. App layout and calendar image will resemble the weather at a particular location.
-2. App will start by cycling to random places in the world every 5 seconds (Purpose: wallpaper). You can pause this cycle with the button on the bottom.
-3. You can search for a specific place by city or country if you want the capital.
-4. You can choose different dates up until 2 days from now to see the forecast 
-5. You can change from celsius to fahrenheit. This will also change the units for wind speed from kph to mph
-6. Have fun exploring the weather around the world!
+
+1. App will start by cycling to random places in the world every 5 seconds (Purpose: wallpaper). You can pause this cycle with the button on the bottom.
+2. You can search for a specific place by city or country if you want the capital.
+3. You can choose different dates up until 2 days from now to see the forecast 
+4. You can change from celsius to fahrenheit. This will also change the units for wind speed from kph to mph
+5. Have fun exploring the weather around the world!
 
 
 # WeatherApp
