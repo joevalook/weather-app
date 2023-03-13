@@ -32,7 +32,7 @@
       <div class="temperature"> {{dailyData.temp_f}}<span>&#8457;</span></div>
     </ng-container>
   </div>
-  <div class="slidecontainer" (click)="onPause()">
+  <div class="slidecontainer" (click)="onChangeDate()">
     <form class="slider-form">
       <div id="date-slider">
         <input type="radio" name="date" id="1" [value]="1" [(ngModel)] = "sliderDate">

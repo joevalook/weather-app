@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   n=1
   repeat = true;
   system = 'Metric'
-  weatherData?: WeatherData
+  weatherData: WeatherData
   containerStyle = "containerColdNight"; //change to object
   randomCityIndex = Math.floor(Math.random() * cities.length)
   time = ''
@@ -54,6 +54,10 @@ export class AppComponent implements OnInit {
   sliderDate = 1
   dailyData: any
 
+  onChangeDate(){
+	this.onPause()
+	this.getData(this.weatherData.location.name)
+  }
 
   getData(randomCity: string) {
     this.weatherService.getWeatherData(randomCity)
@@ -67,7 +71,6 @@ export class AppComponent implements OnInit {
           this.time = this.weatherService.displayTime(response)
           this.dateArr = this.weatherService.arrOfDates(response)
           this.location = this.weatherService.stringTrim(response)
-          this.sliderDate=1
         }
       })
   }

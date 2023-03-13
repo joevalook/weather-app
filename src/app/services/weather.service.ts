@@ -44,7 +44,7 @@ export class WeatherService {
         time: response.location.localtime,
         temp_c: Math.round(response.forecast.forecastday[date-1].day.avgtemp_c),
         temp_f: Math.round(response.forecast.forecastday[date-1].day.avgtemp_f),
-        condition: response.current.condition.text,
+        condition: response.forecast.forecastday[date-1].day.condition.text,
         min_temp_c: Math.round(response.forecast.forecastday[date-1].day.mintemp_c),
         min_temp_f: Math.round(response.forecast.forecastday[date-1].day.mintemp_f),
         max_temp_c: Math.round(response.forecast.forecastday[date-1].day.maxtemp_c),
@@ -246,6 +246,9 @@ export class WeatherService {
     }
     else if (Number(response.temp_c) < -10 && !this.isDay(response)) {
       return "containerColdNight";
+    }
+    else if (Number(response.temp_c) < 5) {
+      return "containerFoggy";
     }
     else if (this.isDay(response)) {
       return "containerRegularDay";
