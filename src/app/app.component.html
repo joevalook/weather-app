@@ -1,6 +1,6 @@
 <div class="search">
-  <form>
-    <input type="text" placeholder="city/country/postalcode">
+  <form #search="ngForm" (click)="onPause()" (submit) = "onSearch()">
+    <input type="text" placeholder="city/country/postalcode" name="locationForm" [(ngModel)] = "cityName">
   </form>
 </div>
 
@@ -26,20 +26,20 @@
     <div class="location">{{location}}</div>
     <div class="country">{{weatherData.location.country}}</div>
     <ng-container *ngIf="system === 'Metric';">
-      <div class="temperature"> {{weatherData.current.temp_c | number: '1.0-0'}}<span>&#8451;</span></div>
+      <div class="temperature"> {{dailyData.temp_c}}<span>&#8451;</span></div>
     </ng-container>
     <ng-container *ngIf="system === 'Imperial';">
-      <div class="temperature"> {{weatherData.current.temp_f | number: '1.0-0'}}<span>&#8457;</span></div>
+      <div class="temperature"> {{dailyData.temp_f}}<span>&#8457;</span></div>
     </ng-container>
   </div>
-  <div class="slidecontainer">
+  <div class="slidecontainer" (click)="onPause()">
     <form class="slider-form">
       <div id="date-slider">
-        <input type="radio" name="date" id="1" value="1" checked="checked" required>
-        <label for="1" [attr.data-date]="dateArr[0]"></label>
-        <input type="radio" name="date" id="2" value="2" required>
+        <input type="radio" name="date" id="1" [value]="1" [(ngModel)] = "sliderDate">
+        <label for="1" [attr.data-date]="dateArr[0]" ></label>
+        <input type="radio" name="date" id="2" [value]="2"  [(ngModel)] = "sliderDate">
         <label for="2" [attr.data-date]="dateArr[1]"></label>
-        <input type="radio" name="date" id="3" value="3" required>
+        <input type="radio" name="date" id="3" [value]="3"  [(ngModel)] = "sliderDate">
         <label for="3" [attr.data-date]="dateArr[2]"></label>
         <div id="debt-amount-pos"></div>
       </div>
@@ -47,7 +47,7 @@
     <div id="debt-amount-pos"></div>
   </div>
   <div class="condition">
-    {{weatherData.current.condition.text}}
+    {{dailyData.condition}}
   </div>
   <div class="lower-data">
     <div class="weather-subsection">
@@ -57,10 +57,10 @@
       </div>
       <div class="subsection-value">
         <ng-container *ngIf="system === 'Metric';">
-          {{weatherData.forecast.forecastday[0].day.mintemp_c | number: '1.0-0'}}<span>&#8451;</span>
+          {{dailyData.min_temp_c}}<span>&#8451;</span>
         </ng-container>
         <ng-container *ngIf="system === 'Imperial';">
-          {{weatherData.forecast.forecastday[0].day.mintemp_f | number: '1.0-0'}}<span>&#8457;</span>
+          {{dailyData.min_temp_f }}<span>&#8457;</span>
         </ng-container>
       </div>
     </div>
@@ -71,10 +71,10 @@
       </div>
       <div class="subsection-value">
         <ng-container *ngIf="system === 'Metric';">
-          {{weatherData.forecast.forecastday[0].day.maxtemp_c | number: '1.0-0'}}<span>&#8451;</span>
+          {{dailyData.max_temp_c}}<span>&#8451;</span>
         </ng-container>
         <ng-container *ngIf="system === 'Imperial';">
-          {{weatherData.forecast.forecastday[0].day.maxtemp_f | number: '1.0-0'}}<span>&#8457;</span>
+          {{dailyData.max_temp_f}}<span>&#8457;</span>
         </ng-container>
       </div>
     </div>
@@ -84,9 +84,9 @@
         <span>Sunrise</span>
       </div>
       <div class="subsection-value">
-        {{weatherData.forecast.forecastday[0].astro.sunrise[0]=== '0' ?
-        weatherData.forecast.forecastday[0].astro.sunrise.substring(1):
-        weatherData.forecast.forecastday[0].astro.sunrise}}
+        {{dailyData.sunrise[0]=== '0' ?
+        dailyData.sunrise.substring(1):
+        dailyData.sunrise}}
       </div>
     </div>
     <div class="weather-subsection">
@@ -95,7 +95,7 @@
         <span>humidity</span>
       </div>
       <div class="subsection-value">
-        {{weatherData.current.humidity}}%
+        {{dailyData.humidity}}%
       </div>
     </div>
     <div class="weather-subsection">
@@ -105,10 +105,10 @@
       </div>
       <div class="subsection-value">
         <ng-container *ngIf="system === 'Metric';">
-          {{weatherData.current.wind_kph | number: '1.0-0'}} kph
+          {{dailyData.wind_kph}} kph
         </ng-container>
         <ng-container *ngIf="system === 'Imperial';">
-          {{weatherData.current.wind_mph | number: '1.0-0'}} mph
+          {{dailyData.wind_mph}} mph
         </ng-container>
       </div>
     </div>
@@ -118,9 +118,9 @@
         <span>Sunset</span>
       </div>
       <div class="subsection-value">
-        {{weatherData.forecast.forecastday[0].astro.sunset[0]=== '0' ?
-        weatherData.forecast.forecastday[0].astro.sunset.substring(1):
-        weatherData.forecast.forecastday[0].astro.sunset}}
+        {{dailyData.sunset[0]=== '0' ?
+        dailyData.sunset.substring(1):
+        dailyData.sunset}}
       </div>
     </div>
 
@@ -129,8 +129,8 @@
 </div>
 
 <div class="play-pause">
-  <img class="repeat" (click)='repeatClick()' src="../assets/pause.png" alt="" *ngIf="repeat === true">
-  <img class="repeat" (click)='repeatClick()' src="../assets/play.png" alt="" *ngIf="repeat === false">
+  <img class="repeat" (click)='onPause()' src="../assets/pause.png" alt="" *ngIf="repeat === true">
+  <img class="repeat" (click)='onPlay()' src="../assets/play.png" alt="" *ngIf="repeat === false">
 </div>
 
 

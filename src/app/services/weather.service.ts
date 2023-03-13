@@ -21,6 +21,42 @@ export class WeatherService {
       .set('days', 7)
     })
   }
+  weatherForDate(response: WeatherData, date: number) {
+    if (date === 1) {
+      return {
+        time: response.location.localtime,
+        temp_c: Math.round(response.current.temp_c),
+        temp_f: Math.round(response.current.temp_f),
+        condition: response.current.condition.text,
+        min_temp_c: Math.round(response.forecast.forecastday[0].day.mintemp_c),
+        min_temp_f: Math.round(response.forecast.forecastday[0].day.mintemp_f),
+        max_temp_c: Math.round(response.forecast.forecastday[0].day.maxtemp_c),
+        max_temp_f: Math.round(response.forecast.forecastday[0].day.maxtemp_f),
+        sunrise: (response.forecast.forecastday[0].astro.sunrise),
+        humidity: response.current.humidity,
+        wind_kph: response.current.wind_kph,
+        wind_mph: response.current.wind_mph,
+        sunset: (response.forecast.forecastday[0].astro.sunset)
+      }
+    }
+    else {
+      return {
+        time: response.location.localtime,
+        temp_c: Math.round(response.forecast.forecastday[date-1].day.avgtemp_c),
+        temp_f: Math.round(response.forecast.forecastday[date-1].day.avgtemp_f),
+        condition: response.current.condition.text,
+        min_temp_c: Math.round(response.forecast.forecastday[date-1].day.mintemp_c),
+        min_temp_f: Math.round(response.forecast.forecastday[date-1].day.mintemp_f),
+        max_temp_c: Math.round(response.forecast.forecastday[date-1].day.maxtemp_c),
+        max_temp_f: Math.round(response.forecast.forecastday[date-1].day.maxtemp_f),
+        sunrise: (response.forecast.forecastday[date-1].astro.sunrise),
+        humidity: response.forecast.forecastday[date-1].day.avghumidity,
+        wind_kph: response.forecast.forecastday[date-1].day.maxwind_kph,
+        wind_mph: response.forecast.forecastday[date-1].day.maxwind_mph,
+        sunset: (response.forecast.forecastday[date-1].astro.sunset)
+      }
+    }
+  }
   stringTrim(response: WeatherData): string{
     if (response.location.name.indexOf('(') != -1) {
       return response.location.name.substring(0, response.location.name.indexOf('('));
@@ -72,19 +108,19 @@ export class WeatherService {
     }
     return arr
   }
-  isDay(response: WeatherData): Boolean {
-		let currentTime = response.location.localtime.split(" ")[1]
+  isDay(response: any): Boolean {
+		let currentTime = response.time.split(" ")[1]
 		if (currentTime[1] ===':') {
-			currentTime = '0' + response.location.localtime.split(" ")[1]
+			currentTime = '0' + response.time.split(" ")[1]
 		}
-		let sunrise = response.forecast.forecastday[0].astro.sunrise
+		let sunrise = response.sunrise
 		if (sunrise[sunrise.length - 2] === 'A'){
 			sunrise = sunrise.substring(0, 5)
 		}
 		else {
 			sunrise = String(Number(sunrise.substring(0,2)) + 12) + sunrise.substring(2,5);
 		}
-		let sunset = response.forecast.forecastday[0].astro.sunset
+		let sunset = response.sunset
 		if (sunset[sunset.length - 2] === 'A'){
 			sunset = sunset.substring(0, 5)
 		}
@@ -168,47 +204,47 @@ export class WeatherService {
     }
   }
 
-  containerImage(response: WeatherData): string {
-    if (response.current.condition.text.toLowerCase().includes('thunder')) {
+  containerImage(response: any): string {
+    if (response.condition.toLowerCase().includes('thunder')) {
       return "containerThunder";
     }
-    else if (response.current.condition.text.toLowerCase().includes('snow') && this.isDay(response)) {
+    else if (response.condition.toLowerCase().includes('snow') && this.isDay(response)) {
       return "containerSnowDay";
     }
-    else if (response.current.condition.text.toLowerCase().includes('snow') && !this.isDay(response)) {
+    else if (response.condition.toLowerCase().includes('snow') && !this.isDay(response)) {
       return "containerSnowNight";
     }
-    else if (response.current.condition.text.toLowerCase().includes('rain') && this.isDay(response)) {
+    else if (response.condition.toLowerCase().includes('rain') && this.isDay(response)) {
       return "containerRainDay";
     }
-    else if (response.current.condition.text.toLowerCase().includes('rain') && !this.isDay(response)) {
+    else if (response.condition.toLowerCase().includes('rain') && !this.isDay(response)) {
       return "containerRainNight";
     }
-    else if (response.current.condition.text.toLowerCase().includes('fog')) {
+    else if (response.condition.toLowerCase().includes('fog')) {
       return "containerFoggy";
     }
-    else if (Number(response.current.wind_mph) > 30 && Number(response.current.temp_c) > 0 && this.isDay(response)) {
+    else if (Number(response.wind_mph) > 30 && Number(response.temp_c) > 0 && this.isDay(response)) {
       return "containerWindyDay";
     }
-    else if ((response.current.condition.text.toLowerCase().includes('cloud') || (response.current.condition.text.toLowerCase().includes('overcast'))) && this.isDay(response)) {
+    else if ((response.condition.toLowerCase().includes('cloud') || (response.condition.toLowerCase().includes('overcast'))) && this.isDay(response)) {
       return "containerCloudyDay";
     }
-    else if ((response.current.condition.text.toLowerCase().includes('cloud') || (response.current.condition.text.toLowerCase().includes('overcast'))) && !this.isDay(response)) {
+    else if ((response.condition.toLowerCase().includes('cloud') || (response.condition.toLowerCase().includes('overcast'))) && !this.isDay(response)) {
       return "containerCloudyNight";
     }
-    else if (Number(response.current.humidity) < 40 && Number(response.current.temp_c) > 30 && this.isDay(response)) {
+    else if (Number(response.humidity) < 40 && Number(response.temp_c) > 30 && this.isDay(response)) {
       return "containerDesertDay";
     }
-    else if (Number(response.current.wind_mph) > 20 && Number(response.current.temp_c) > 10 && this.isDay(response)) {
+    else if (Number(response.wind_mph) > 20 && Number(response.temp_c) > 10 && this.isDay(response)) {
       return "containerWindyDay";
     }
-    else if (Number(response.current.temp_c) > 25 && this.isDay(response)) {
+    else if (Number(response.temp_c) > 25 && this.isDay(response)) {
       return "containerHotDay";
     }
-    else if (Number(response.current.temp_c) < -10 && this.isDay(response)) {
+    else if (Number(response.temp_c) < -10 && this.isDay(response)) {
       return "containerColdDay";
     }
-    else if (Number(response.current.temp_c) < -10 && !this.isDay(response)) {
+    else if (Number(response.temp_c) < -10 && !this.isDay(response)) {
       return "containerColdNight";
     }
     else if (this.isDay(response)) {

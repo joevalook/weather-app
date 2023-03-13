@@ -50,42 +50,48 @@ export class AppComponent implements OnInit {
   myInterval: any
   dateArr: string[]
   location: string
+  cityName = 'toronto'
+  sliderDate = 1
+  dailyData: any
 
 
-  getData(randomCityIndex: number) {
-    this.weatherService.getWeatherData(cities[randomCityIndex].name + ', ' + cities[randomCityIndex].country)
+  getData(randomCity: string) {
+    this.weatherService.getWeatherData(randomCity)
       .subscribe({
         next: (response) => {
           this.weatherData = response;
           console.log(response);
-
-          this.containerStyle = this.weatherService.containerImage(response)
+          this.dailyData = this.weatherService.weatherForDate(response, this.sliderDate)
+          this.containerStyle = this.weatherService.containerImage(this.dailyData)
           document.body.style.backgroundColor = this.weatherService.bodyColor(this.containerStyle);
           this.time = this.weatherService.displayTime(response)
           this.dateArr = this.weatherService.arrOfDates(response)
           this.location = this.weatherService.stringTrim(response)
+          this.sliderDate=1
         }
       })
   }
-  repeatClick(){
-    if (this.repeat) {
-      this.repeat = false
+  onPause(){
       clearInterval(this.myInterval)
-    }
-    else {
-      this.repeat = true
-      this.myInterval = setInterval(() => {
-        this.getData(Math.floor(Math.random() * cities.length))
-        console.log(this.randomCityIndex)
-      }, 5000);
-    }
+      this.repeat = false;
 
+  }
+  onPlay(){
+    this.myInterval = setInterval(() => {
+      this.getData(cities[Math.floor(Math.random() * cities.length)].name + ', ' + cities[Math.floor(Math.random() * cities.length)].country)
+      console.log(this.randomCityIndex)
+    }, 5000);
+    this.repeat =true
+  }
+  onSearch(){
+    this.getData(this.cityName)
+    this.cityName = ""
   }
 
   ngOnInit() {
-    this.getData(this.randomCityIndex)
+    this.getData(cities[Math.floor(Math.random() * cities.length)].name + ', ' + cities[Math.floor(Math.random() * cities.length)].country)
     this.myInterval = setInterval(() => {
-      this.getData(Math.floor(Math.random() * cities.length))
+      this.getData(cities[Math.floor(Math.random() * cities.length)].name + ', ' + cities[Math.floor(Math.random() * cities.length)].country)
       console.log(this.randomCityIndex)
     }, 5000);
     console.log(cities[this.randomCityIndex].name + ', ' + cities[this.randomCityIndex].country)

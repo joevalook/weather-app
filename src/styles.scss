@@ -52,6 +52,9 @@ body {
     // align-items: center;
 }
 
+input:focus::placeholder {
+  color: transparent;
+}
 .containerThunder {
     width: $width;
     height: 80vh;
